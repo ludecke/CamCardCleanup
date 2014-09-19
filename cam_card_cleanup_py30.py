@@ -2,9 +2,6 @@
 import os
 import re
 import inspect
-import codecs
-import io #py3 open unicode behaviour
-import csv
 
 class Businesscard:
 
@@ -24,9 +21,6 @@ class Businesscard:
     self.officephone = officephone
 
 cleaned_content = []
-templine = "AAAAAAAAA"
-counter = 0
-counter2 = 0
 
 
 #def inplace_change(filename, old_string, new_string):
@@ -35,27 +29,14 @@ counter2 = 0
 #find the string between the first two " in a line and use that as the object's name
 #string1 = line()
 
+#for filename in os.listdir(os.getcwd()+"/camcard_export"):
 with open("camcard_export/contacts_copiedtext.csv") as f:
     content = f.readlines()
     for line in content:
-        counter2 = 0
-        counter = counter+1        
         if line.startswith("Gesch"):
-            templine = line
-            for line2 in content:
-                counter2 = counter2+1
-                if (counter2+1) == counter:
-                    print line2
+            cleaned_content.append(line)
 
-                    #cleaned_content.append(templine+line)
-#for line in cleaned_content:
-    #print line
-
-#with codecs.open("output.csv", "wb", "utf-8") as f:
- #   writer = csv.writer(f, lineterminator='\n')
-  #  for val in cleaned_content:
-   #     writer.writerow([val]) 
-
+print cleaned_content
         #Concatenate lines that were split with /n
         #if 'Gesch' in line:
             #Return line number and set it to line number of preceding line
